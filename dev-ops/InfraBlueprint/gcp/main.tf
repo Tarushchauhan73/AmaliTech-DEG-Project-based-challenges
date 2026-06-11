@@ -20,26 +20,6 @@ locals {
   }
 }
 
-resource "google_project_service" "compute" {
-  project = var.gcp_project
-  service = "compute.googleapis.com"
-}
-
-resource "google_project_service" "storage" {
-  project = var.gcp_project
-  service = "storage.googleapis.com"
-}
-
-resource "google_project_service" "sqladmin" {
-  project = var.gcp_project
-  service = "sqladmin.googleapis.com"
-}
-
-resource "google_project_service" "servicenetworking" {
-  project = var.gcp_project
-  service = "servicenetworking.googleapis.com"
-}
-
 resource "google_compute_network" "main" {
   name                    = "vela-network"
   auto_create_subnetworks = false
@@ -47,7 +27,6 @@ resource "google_compute_network" "main" {
   description             = "VPC network for Vela Payments GCP infrastructure"
   project                 = var.gcp_project
 
-  labels = local.common_labels
 }
 
 resource "google_compute_subnetwork" "public" {
@@ -57,7 +36,6 @@ resource "google_compute_subnetwork" "public" {
   network       = google_compute_network.main.id
   private_ip_google_access = true
 
-  labels = local.common_labels
 }
 
 resource "google_compute_subnetwork" "private" {
@@ -67,7 +45,6 @@ resource "google_compute_subnetwork" "private" {
   network       = google_compute_network.main.id
   private_ip_google_access = true
 
-  labels = local.common_labels
 }
 
 resource "google_compute_firewall" "web_http_https" {
@@ -139,7 +116,7 @@ resource "google_compute_instance" "web" {
 
   boot_disk {
     initialize_params {
-      image = "projects/ubuntu-os-cloud/global/images/family/ubuntu-2404-lts"
+      image = "ubuntu-os-cloud/ubuntu-2404-lts-amd64"
       size  = 20
       type  = "pd-balanced"
     }
@@ -172,17 +149,12 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   network                 = google_compute_network.main.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
-  project                 = var.gcp_project
-
-  depends_on = [
-    google_project_service.servicenetworking,
-    google_project_service.sqladmin,
-  ]
 }
 
 resource "google_sql_database_instance" "main" {
   name             = "vela-postgres-db"
   project          = var.gcp_project
+  deletion_protection = false
   region           = var.gcp_region
   database_version = "POSTGRES_15"
 

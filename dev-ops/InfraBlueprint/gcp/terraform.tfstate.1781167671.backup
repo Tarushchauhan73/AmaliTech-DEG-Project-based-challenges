@@ -1,0 +1,31 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.0",
+  "serial": 105,
+  "lineage": "a6e73c08-099c-a820-aa5d-787e0442f473",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "google_project_service",
+      "name": "storage",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": null,
+            "disable_on_destroy": true,
+            "id": "project-2ed8807f-1e3d-4d43-b79/storage.googleapis.com",
+            "project": "project-2ed8807f-1e3d-4d43-b79",
+            "service": "storage.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

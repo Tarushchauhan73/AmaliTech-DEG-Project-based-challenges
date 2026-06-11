@@ -1,0 +1,251 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.0",
+  "serial": 67,
+  "lineage": "a6e73c08-099c-a820-aa5d-787e0442f473",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "google_compute_global_address",
+      "name": "private_ip_address",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": "10.12.0.0",
+            "address_type": "INTERNAL",
+            "creation_timestamp": "2026-06-11T00:41:31.733-07:00",
+            "description": "",
+            "id": "projects/project-2ed8807f-1e3d-4d43-b79/global/addresses/vela-private-ip-range",
+            "ip_version": "",
+            "name": "vela-private-ip-range",
+            "network": "https://www.googleapis.com/compute/v1/projects/project-2ed8807f-1e3d-4d43-b79/global/networks/vela-network",
+            "prefix_length": 16,
+            "project": "project-2ed8807f-1e3d-4d43-b79",
+            "purpose": "VPC_PEERING",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/project-2ed8807f-1e3d-4d43-b79/global/addresses/vela-private-ip-range",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "google_compute_network.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_network",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "auto_create_subnetworks": false,
+            "delete_default_routes_on_create": false,
+            "description": "VPC network for Vela Payments GCP infrastructure",
+            "enable_ula_internal_ipv6": false,
+            "gateway_ipv4": "",
+            "id": "projects/project-2ed8807f-1e3d-4d43-b79/global/networks/vela-network",
+            "internal_ipv6_range": "",
+            "mtu": 0,
+            "name": "vela-network",
+            "network_firewall_policy_enforcement_order": "AFTER_CLASSIC_FIREWALL",
+            "project": "project-2ed8807f-1e3d-4d43-b79",
+            "routing_mode": "REGIONAL",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/project-2ed8807f-1e3d-4d43-b79/global/networks/vela-network",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_project_service",
+      "name": "storage",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": null,
+            "disable_on_destroy": true,
+            "id": "project-2ed8807f-1e3d-4d43-b79/storage.googleapis.com",
+            "project": "project-2ed8807f-1e3d-4d43-b79",
+            "service": "storage.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_networking_connection",
+      "name": "private_vpc_connection",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "projects%2Fproject-2ed8807f-1e3d-4d43-b79%2Fglobal%2Fnetworks%2Fvela-network:servicenetworking.googleapis.com",
+            "network": "projects/project-2ed8807f-1e3d-4d43-b79/global/networks/vela-network",
+            "peering": "servicenetworking-googleapis-com",
+            "reserved_peering_ranges": [
+              "vela-private-ip-range"
+            ],
+            "service": "servicenetworking.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_address",
+            "google_compute_network.main",
+            "google_project_service.servicenetworking",
+            "google_project_service.sqladmin"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_sql_database_instance",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "available_maintenance_versions": [],
+            "clone": [],
+            "connection_name": "project-2ed8807f-1e3d-4d43-b79:us-central1:vela-postgres-db",
+            "database_version": "POSTGRES_15",
+            "deletion_protection": true,
+            "dns_name": "",
+            "encryption_key_name": null,
+            "first_ip_address": "10.12.0.3",
+            "id": "vela-postgres-db",
+            "instance_type": "CLOUD_SQL_INSTANCE",
+            "ip_address": [
+              {
+                "ip_address": "10.12.0.3",
+                "time_to_retire": "",
+                "type": "PRIVATE"
+              }
+            ],
+            "maintenance_version": "POSTGRES_15_17.R20260319.04_04",
+            "master_instance_name": "",
+            "name": "vela-postgres-db",
+            "private_ip_address": "10.12.0.3",
+            "project": "project-2ed8807f-1e3d-4d43-b79",
+            "psc_service_attachment_link": "",
+            "public_ip_address": "",
+            "region": "us-central1",
+            "replica_configuration": [],
+            "restore_backup_context": [],
+            "root_password": null,
+            "self_link": "https://sqladmin.googleapis.com/sql/v1beta4/projects/project-2ed8807f-1e3d-4d43-b79/instances/vela-postgres-db",
+            "server_ca_cert": [
+              {
+                "cert": "-----BEGIN CERTIFICATE-----\nMIIDcTCCAlmgAwIBAgIBADANBgkqhkiG9w0BAQsFADBwMS0wKwYDVQQuEyQ3MDFi\nODkzMS1jMGUzLTQzNzEtOTJkZC0xMjMzZWY5ZmI0MmQxHDAaBgNVBAMTE0Nsb3Vk\nIFNRTCBTZXJ2ZXIgQ0ExFDASBgNVBAoTC0dvb2dsZSwgSW5jMQswCQYDVQQGEwJV\nUzAeFw0yNjA2MTEwNzQ1MTRaFw0zNjA2MDgwNzQ2MTRaMHAxLTArBgNVBC4TJDcw\nMWI4OTMxLWMwZTMtNDM3MS05MmRkLTEyMzNlZjlmYjQyZDEcMBoGA1UEAxMTQ2xv\ndWQgU1FMIFNlcnZlciBDQTEUMBIGA1UEChMLR29vZ2xlLCBJbmMxCzAJBgNVBAYT\nAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8QPHD0dX62U/p2Ah\nPA8ZvodXZG4h6S7C4SiqK7zn2grlbrpXJiTaQ75GscFvwsJUWOIz8X+GirlM0I/y\nZXj3lXNIn7t35SSnsjEfNdQ1bx176HfWsb/P6muX9o8KBg02BnkKxMZr7H9aKYAL\nLE9yGHSplrRZtDAEr9p6QHm0Ca3MeSHSayGLgNpIt6qkz67Z1MO6dlBfMq1PGZjP\nR8+0YPcWemdUy9ciWRrXYIlgwZScb+RTP4kST0DFVjdMBUUWCrBD21/5Diy2l/+/\nf0e3EIDB/6RyU8GJZK1dfOuIsCdLLJJWaAOxIyY5+sq9Zo9mlTBsKGBTfDDhnR1G\nw1TBUQIDAQABoxYwFDASBgNVHRMBAf8ECDAGAQH/AgEAMA0GCSqGSIb3DQEBCwUA\nA4IBAQAoyfe01G5sEpVDM31lgyJZJzcxpOW5reCyt6xIvd/YmwnFRmtDV31v/4S2\nDDj8KkR6eH2o8ZMaOXclr14FUAvVqT4cxcgHt+WfwncGkg4C8zXkn/2S0wGYOnsP\nsJmdZlAMppATQBvdHxDrGDG8MBcHaKwvoP5o91Sr0fXPhOUOS8TshhvoJQFSw+43\nheuDA37p+GTF9yTSSoykKfrmesnVMGtSrfdYlBnWQnfek9dNjlqGBuP0q/qw1OKL\n1z36W8WZ6akgJoIeRah+YzVuZEF9/VFy58aAdptzE0Ct4TwX/pEUtU20Yst+Ocrk\n0gsJBsWulZAIOqiIAp7j3jgWk18y\n-----END CERTIFICATE-----",
+                "common_name": "C=US,O=Google\\, Inc,CN=Cloud SQL Server CA,dnQualifier=701b8931-c0e3-4371-92dd-1233ef9fb42d",
+                "create_time": "2026-06-11T07:45:14.670Z",
+                "expiration_time": "2036-06-08T07:46:14.670Z",
+                "sha1_fingerprint": "9a12582ecff8a7a6000a598f2ff5cae3b86f7981"
+              }
+            ],
+            "service_account_email_address": "p193359394416-kskxmk@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+            "settings": [
+              {
+                "activation_policy": "ALWAYS",
+                "active_directory_config": [],
+                "advanced_machine_features": [],
+                "availability_type": "ZONAL",
+                "backup_configuration": [
+                  {
+                    "backup_retention_settings": [
+                      {
+                        "retained_backups": 7,
+                        "retention_unit": "COUNT"
+                      }
+                    ],
+                    "binary_log_enabled": false,
+                    "enabled": false,
+                    "location": "",
+                    "point_in_time_recovery_enabled": false,
+                    "start_time": "08:00",
+                    "transaction_log_retention_days": 7
+                  }
+                ],
+                "collation": "",
+                "connector_enforcement": "NOT_REQUIRED",
+                "data_cache_config": [],
+                "database_flags": [],
+                "deletion_protection_enabled": false,
+                "deny_maintenance_period": [],
+                "disk_autoresize": true,
+                "disk_autoresize_limit": 0,
+                "disk_size": 10,
+                "disk_type": "PD_SSD",
+                "edition": "ENTERPRISE",
+                "insights_config": [],
+                "ip_configuration": [
+                  {
+                    "allocated_ip_range": "",
+                    "authorized_networks": [],
+                    "enable_private_path_for_google_cloud_services": false,
+                    "ipv4_enabled": false,
+                    "private_network": "projects/project-2ed8807f-1e3d-4d43-b79/global/networks/vela-network",
+                    "psc_config": [],
+                    "require_ssl": false
+                  }
+                ],
+                "location_preference": [
+                  {
+                    "follow_gae_application": "",
+                    "secondary_zone": "",
+                    "zone": "us-central1-c"
+                  }
+                ],
+                "maintenance_window": [],
+                "password_validation_policy": [],
+                "pricing_plan": "PER_USE",
+                "sql_server_audit_config": [],
+                "tier": "db-f1-micro",
+                "time_zone": "",
+                "user_labels": {},
+                "version": 4
+              }
+            ],
+            "timeouts": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "root_password"
+              }
+            ]
+          ],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNDAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInVwZGF0ZSI6MTgwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_address",
+            "google_compute_network.main",
+            "google_project_service.servicenetworking",
+            "google_project_service.sqladmin",
+            "google_service_networking_connection.private_vpc_connection"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
