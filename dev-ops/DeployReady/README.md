@@ -442,3 +442,27 @@ This solution demonstrates a complete, modern DevOps workflow using **Railway**:
 - ✅ Cost-effective ($5/month free tier includes MVP workloads)
 
 **Status:** ✨ Ready for production deployment on Railway. All three parts completed.
+
+---
+
+## ✅ Live Deployment
+
+**Status:** Deployed and running successfully on Railway.
+
+**Live URL:** https://amalitech-deg-project-based-challenges-production-87a0.up.railway.app
+
+**Health Check:**
+```bash
+curl https://amalitech-deg-project-based-challenges-production-87a0.up.railway.app/health
+```
+
+**Response:**
+```json
+{"status":"ok"}
+```
+
+CI/CD pipeline runs automatically on every push to `main`:
+1. ✅ Test (Jest)
+2. ✅ Build & Deploy to Railway
+3. ✅ Health check verification
+
