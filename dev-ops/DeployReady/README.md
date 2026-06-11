@@ -450,10 +450,13 @@ This solution demonstrates a complete, modern DevOps workflow using **Railway**:
 **Status:** Deployed and running successfully on Railway.
 
 **Live URL:** https://amalitech-deg-project-based-challenges-production-87a0.up.railway.app
+it shows cant get/ means its deployed but not checked health ,but if we have to check health status than use :
 
 **Health Check:**
 ```bash
-curl https://amalitech-deg-project-based-challenges-production-87a0.up.railway.app/health
+https://amalitech-deg-project-based-challenges-production-87a0.up.railway.app/health
+
+ <img width="1440" height="900" alt="Screenshot 2026-06-11 at 7 27 11 AM" src="https://github.com/user-attachments/assets/21e5c048-e31b-44a1-89b2-3cbd60306636" />
 ```
 
 **Response:**
