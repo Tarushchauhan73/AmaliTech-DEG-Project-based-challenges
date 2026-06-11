@@ -40,8 +40,19 @@ web_instance_ip           = "34.132.59.129"
 Screenshots from the verified run are included in [`screenshots/`](./screenshots):
 
 1. `01-vm-instance.png` — Compute Engine VM details (Status: Running)
+ <img width="637" height="357" alt="Screenshot 2026-06-11 at 1 44 29 PM" src="https://github.com/user-attachments/assets/3f557ed5-bfb3-4c21-bad5-eaed4c5f7ba2" />
+ 
+ <img width="1440" height="800" alt="Screenshot 2026-06-11 at 1 34 52 PM" src="https://github.com/user-attachments/assets/3b2bd1e2-bcb6-494a-9fb5-f7a377c3cfc6" />
+
+  
 2. `02-cloud-sql-overview.png` — Cloud SQL instance overview & operations log
+  <img width="1440" height="753" alt="Screenshot 2026-06-11 at 1 37 38 PM" src="https://github.com/user-attachments/assets/95271f6e-54b2-41fc-b782-c0c371a881c3" />
+  
+  <img width="1440" height="900" alt="Screenshot 2026-06-11 at 1 38 10 PM" src="https://github.com/user-attachments/assets/bb353810-cb2c-4fdf-9ccb-fdd0eb6d91c1" />
+
+
 3. `03-storage-bucket.png` — Cloud Storage bucket details (Not public, versioning enabled)
+<img width="639" height="333" alt="Screenshot 2026-06-11 at 5 52 58 PM" src="https://github.com/user-attachments/assets/a794e8c3-1e8a-4679-b237-c948333d853c" />
 
 ---
 
