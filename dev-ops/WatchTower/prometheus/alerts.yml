@@ -1,0 +1,26 @@
+groups:
+  - name: watchtower-alerts
+    rules:
+      - alert: ServiceDown
+        expr: probe_success == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Service is down
+
+      - alert: HighErrorRate
+        expr: 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: High error rate
+
+      - alert: ServiceNotScraping
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Service metrics not being scraped

@@ -1,0 +1,116 @@
+version: '3.9'
+
+services:
+  order-service:
+    build:
+      context: ./app/order-service
+    environment:
+      - PORT=${ORDER_SERVICE_PORT}
+      - SERVICE_NAME=${ORDER_SERVICE_NAME}
+    ports:
+      - '${ORDER_SERVICE_PORT}:3001'
+    networks:
+      - watchtower
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  tracking-service:
+    build:
+      context: ./app/tracking-service
+    environment:
+      - PORT=${TRACKING_SERVICE_PORT}
+      - SERVICE_NAME=${TRACKING_SERVICE_NAME}
+    ports:
+      - '${TRACKING_SERVICE_PORT}:3002'
+    networks:
+      - watchtower
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  notification-service:
+    build:
+      context: ./app/notification-service
+    environment:
+      - PORT=${NOTIFICATION_SERVICE_PORT}
+      - SERVICE_NAME=${NOTIFICATION_SERVICE_NAME}
+    ports:
+      - '${NOTIFICATION_SERVICE_PORT}:3003'
+    networks:
+      - watchtower
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+    ports:
+      - '${PROMETHEUS_PORT}:9090'
+    depends_on:
+      - order-service
+      - tracking-service
+      - notification-service
+      - blackbox-exporter
+    networks:
+      - watchtower
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    volumes:
+      - ./prometheus/blackbox.yml:/etc/blackbox_exporter/config.yml:ro
+    command:
+      - '--config.file=/etc/blackbox_exporter/config.yml'
+    ports:
+      - '9115:9115'
+    networks:
+      - watchtower
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '${GRAFANA_PORT}:3000'
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_DASHBOARDS_JSON_ENABLED=true
+      - GF_DASHBOARDS_JSON_PATH=/var/lib/grafana/dashboards
+    depends_on:
+      - prometheus
+    networks:
+      - watchtower
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+networks:
+  watchtower:
+    driver: bridge
