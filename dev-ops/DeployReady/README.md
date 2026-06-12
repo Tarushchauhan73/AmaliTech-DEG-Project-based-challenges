@@ -115,6 +115,11 @@ docker logs -f kora-analytics-api
 | POST | `/data` | Echo endpoint — accepts JSON payload |
 
 ---
+<img width="1440" height="900" alt="Screenshot 2026-06-12 at 12 26 32 PM" src="https://github.com/user-attachments/assets/80602514-3715-4316-817c-e2473d87febe" />
+
+<img width="1440" height="900" alt="Screenshot 2026-06-12 at 12 26 50 PM" src="https://github.com/user-attachments/assets/ddbd0cd2-291d-4b40-8309-e3021fbd8278" />
+
+<img width="1440" height="900" alt="Screenshot 2026-06-12 at 12 25 20 PM" src="https://github.com/user-attachments/assets/85da1e49-ed2f-4c0e-abea-9cb0d0539374" />
 
 ## 📦 Deliverables
 
