@@ -5,7 +5,7 @@ This project provisions a reproducible, secure cloud infrastructure for Vela Pay
 The infrastructure is designed to be destroyed and recreated with a single command, and follows GCP security best practices: private database access, least-privilege service accounts, locked-down storage, and tag-based firewall rules.
 
 ---
-
+Open GCP for detailed readme.md....
 ## Where to Go
 
 All Terraform code and detailed setup instructions live in the [`gcp/`](./gcp) directory.
