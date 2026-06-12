@@ -190,7 +190,102 @@ dev-ops/WatchTower/
 └── dashboards/
 └── watchtower.json
 
+screenshots/
+├── grafana-dashboard.png
+├── prometheus-targets.png
+├── prometheus-alerts.png
+└── blackbox-exporter.png
 ---
+
+
+## Screenshots
+
+### Grafana Dashboard
+
+**URL:** `http://localhost:3000`
+
+The Grafana dashboard provides a real-time view of service health and performance metrics collected from Prometheus. It includes:
+
+* HTTP Request Rate per service
+* 5xx Error Rate monitoring
+* Service Health Status panel
+* Auto-provisioned dashboards and data sources
+
+![Grafana Dashboard]
+
+<img width="1440" height="798" alt="Screenshot 2026-06-12 at 11 57 00 AM" src="https://github.com/user-attachments/assets/646b2123-02f7-4358-8bdb-3f1611f1d03b" />
+
+<img width="1440" height="822" alt="Screenshot 2026-06-12 at 11 57 15 AM" src="https://github.com/user-attachments/assets/958ee8be-a080-4042-b821-f572fff30705" />
+
+
+**Expected Result**
+
+* All services displayed as healthy (`1`)
+* Request rate graphs updating in real time
+* Error rate panel showing `0` or `No Data` during normal operation
+
+---
+
+### Prometheus Targets & Alerts
+
+**Targets URL:** `http://localhost:9090/targets`
+**Alerts URL:** `http://localhost:9090/alerts`
+
+Prometheus continuously scrapes metrics from all backend services and evaluates alert rules every 15 seconds.
+
+![Prometheus Targets]
+
+<img width="1440" height="798" alt="Screenshot 2026-06-12 at 11 57 55 AM" src="https://github.com/user-attachments/assets/8353bc61-77a8-4e7b-a487-0aefe261e66c" />
+
+![Prometheus Alerts]
+
+<img width="1440" height="795" alt="Screenshot 2026-06-12 at 11 57 29 AM" src="https://github.com/user-attachments/assets/480316a1-bd18-48b5-85d6-655248dc3e74" />
+
+
+**Expected Result**
+
+| Job                  | Health |
+| -------------------- | ------ |
+| order-service        | UP     |
+| tracking-service     | UP     |
+| notification-service | UP     |
+| blackbox-probe       | UP     |
+
+Configured alert rules:
+
+* ServiceDown
+* HighErrorRate
+* ServiceNotScraping
+
+All alerts should remain **Inactive/OK** while services are healthy.
+
+---
+
+### Blackbox Exporter
+
+**URL:** `http://localhost:9115`
+
+Blackbox Exporter performs independent HTTP health checks against all backend services and exposes probe metrics to Prometheus.
+
+Monitored endpoints:
+
+* `http://order-service:3001/health`
+* `http://tracking-service:3002/health`
+* `http://notification-service:3003/health`
+
+![Blackbox Exporter]
+<img width="1440" height="797" alt="Screenshot 2026-06-12 at 11 58 07 AM" src="https://github.com/user-attachments/assets/c1962f0e-f905-49eb-aae1-121c1a613f5a" />
+
+<img width="1440" height="796" alt="Screenshot 2026-06-12 at 11 58 32 AM" src="https://github.com/user-attachments/assets/1b4e6fe9-bb40-420d-ade2-50277589e851" />
+
+**Expected Result**
+
+* `probe_success = 1`
+* HTTP status code `200`
+* Response time metrics available
+* All probe targets reported as `UP`
+
+This validates service availability independently of application-level metrics and provides an additional layer of monitoring.
 
 ## Design Decisions
 
